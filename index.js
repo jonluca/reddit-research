@@ -11,6 +11,7 @@ var spam-test = new LineByLineReader('titles/spam-tests.txt');
 
 var classifier = bayes();
 
+// Good post title reader
 good.on('error', function (err) {
 	console.log("Error in reading good post titles!");
 });
@@ -23,6 +24,7 @@ good.on('end', function () {
 	console.log('Finished training positive post titles');
 });
 
+// Spam reader
 spam.on('error', function (err) {
 	console.log("Error in reading negative post titles!");
 });
@@ -39,8 +41,8 @@ spam.on('end', function () {
 classifier.categorize('awesome, cool, amazing!! Yay.');
 // => 'positive'
 
-// serialize the classifier's state as a JSON string.
-var stateJson = classifier.toJson();
+// // Saves the state of the classifier so we won't have to retrain it on every new run in deployment. Not used currently
+// var stateJson = classifier.toJson();
 
-// load the classifier back from its JSON representation.
-var revivedClassifier = bayes.fromJson(stateJson);
+// // Loads the classifier from the saved state
+// var revivedClassifier = bayes.fromJson(stateJson);
