@@ -1,14 +1,39 @@
 var bayes = require('bayes');
+var line-reader = require('line-by-line');
+
+// Training models
+var good = new LineByLineReader('titles/good.txt');
+var spam = new LineByLineReader('titles/spam.txt');
+
+// Tests
+var good-test = new LineByLineReader('tests/good-test.txt');
+var spam-test = new LineByLineReader('titles/spam-tests.txt');
 
 var classifier = bayes();
 
-// Teach it positive post titles
-classifier.learn('amazing, awesome movie!! Yeah!! Oh boy.', 'positive');
-classifier.learn('Sweet, this is incredibly, amazing, perfect, great!!', 'positive');
+good.on('error', function (err) {
+	console.log("Error in reading good post titles!");
+});
 
-// Teach it potentially spammy titles
+good.on('line', function (line) {
+	classifier.learn(line, 'positive');
+});
 
-classifier.learn('terrible, shitty thing. Damn. Sucks!!', 'negative');
+good.on('end', function () {
+	console.log('Finished training positive post titles');
+});
+
+spam.on('error', function (err) {
+	console.log("Error in reading negative post titles!");
+});
+
+spam.on('line', function (line) {
+	classifier.learn(line, 'negative');
+});
+
+spam.on('end', function () {
+	console.log('Finished training negative post titles');
+});
 
 // This is where we'll categorize post titles, and verify how good it is
 classifier.categorize('awesome, cool, amazing!! Yay.');
