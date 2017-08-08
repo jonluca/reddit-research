@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/jonluca/reddit-research#readme",
   "dependencies": {
-    "bayes": "0.0.7"
+    "bayes": "0.0.7",
+    "line-by-line": "^0.1.5"
   }
 }
