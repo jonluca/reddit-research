@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/jonluca/reddit-research/issues"
   },
-  "homepage": "https://github.com/jonluca/reddit-research#readme"
+  "homepage": "https://github.com/jonluca/reddit-research#readme",
+  "dependencies": {
+    "bayes": "0.0.7"
+  }
 }
